@@ -1,10 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class Solution {
-public:
-    
-    string removeOuter(string s) {
+
         
         // Intuition:
         // We remove the outermost brackets
@@ -19,33 +16,24 @@ public:
         // For ')' :
         //   First decrease balance.
         //   If balance > 0 -> not outermost, add it.
-
+class Solution {
+public:
+    string removeOuter(string& s) {
+        // code here
+        
         string ans = "";
-        int balance = 0;
+        stack<char> st;
 
-        for(char ch : s) {
+        for (char ch : s) {
 
-            // Opening bracket
-            if(ch == '(') {
+            if (ch == ')')
+                st.pop();
 
-                // Not outermost
-                if(balance > 0) {
-                    ans += ch;
-                }
+            if (!(st.empty()))
+                ans += ch;
 
-                balance++;
-            }
-
-            // Closing bracket
-            else {
-
-                balance--;
-
-                // Not outermost
-                if(balance > 0) {
-                    ans += ch;
-                }
-            }
+            if (ch == '(')
+                st.push(ch);
         }
 
         return ans;
